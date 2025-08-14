@@ -20,5 +20,12 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	TObjectPtr<class UInputAction> PrimaryInteractAction;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	TSubclassOf<class UInv_HUDWidget> HUDWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UInv_HUDWidget> HUDWidget;
+
 	void PrimaryInteract();
+	void CreateHUDWidget();
 };
