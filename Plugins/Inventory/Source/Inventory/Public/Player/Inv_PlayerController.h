@@ -13,16 +13,24 @@ public:
 	AInv_PlayerController();
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+	void ToggleInventory();
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 
 private:
+	TWeakObjectPtr<class UInv_InventoryComponent> InventoryComponent;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	TArray<TObjectPtr<class UInputMappingContext>> DefaultIMCs;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	TObjectPtr<class UInputAction> PrimaryInteractAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	TObjectPtr<UInputAction> ToggleInventoryAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	TSubclassOf<class UInv_HUDWidget> HUDWidgetClass;
