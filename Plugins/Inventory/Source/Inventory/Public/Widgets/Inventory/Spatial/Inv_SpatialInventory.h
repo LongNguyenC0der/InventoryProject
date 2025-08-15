@@ -9,4 +9,16 @@ class INVENTORY_API UInv_SpatialInventory : public UInv_InventoryBase
 {
 	GENERATED_BODY()
 	
+private:
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UWidgetSwitcher> Switcher;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UInv_InventoryGrid> Grid_Equippables;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UInv_InventoryGrid> Grid_Consumables;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UInv_InventoryGrid> Grid_Craftables;
 };
