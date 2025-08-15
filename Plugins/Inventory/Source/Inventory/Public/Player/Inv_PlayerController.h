@@ -13,7 +13,7 @@ public:
 	AInv_PlayerController();
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();
 
 protected:
