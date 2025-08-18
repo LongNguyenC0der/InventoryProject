@@ -21,7 +21,15 @@ void UInv_InventoryComponent::ToggleInventoryMenu()
 
 void UInv_InventoryComponent::TryAddItem(UInv_ItemComponent* ItemConponent)
 {
-	NoRoomInInventory.Broadcast();
+	FInv_SlotAvailabilityResult Result = InventoryMenu->HasRoomForItem(ItemConponent);
+
+	if (Result.TotalRoomToFill == 0)
+	{
+		NoRoomInInventory.Broadcast();
+		return;
+	}
+
+	// TODO: Actually add the item to the inventory
 }
 
 void UInv_InventoryComponent::BeginPlay()

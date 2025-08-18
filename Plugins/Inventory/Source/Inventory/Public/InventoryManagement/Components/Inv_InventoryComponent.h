@@ -17,7 +17,7 @@ public:
 	void ToggleInventoryMenu();
 
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
-	void TryAddItem(UInv_ItemComponent* ItemConponent);
+	void TryAddItem(class UInv_ItemComponent* ItemConponent);
 
 	FInventoryItemChange OnItemAdded;
 	FInventoryItemChange OnItemRemoved;
