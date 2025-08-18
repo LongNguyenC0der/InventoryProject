@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "InventoryManagement/FastArray/Inv_FastArray.h"
 #include "Inv_InventoryComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryItemChange, class UInv_InventoryItem*, Item);
@@ -14,7 +15,9 @@ class INVENTORY_API UInv_InventoryComponent : public UActorComponent
 
 public:	
 	UInv_InventoryComponent();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	void ToggleInventoryMenu();
+	void AddRepSubObj(UObject* SubObj);
 
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
 	void TryAddItem(class UInv_ItemComponent* ItemComponent);
@@ -33,6 +36,9 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	UPROPERTY(Replicated)
+	FInv_InventoryFastArray InventoryList;
+
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	TSubclassOf<class UInv_InventoryBase> InventoryMenuClass;
 
