@@ -46,6 +46,7 @@ private:
 	bool MatchesCategory(const UInv_InventoryItem* Item) const;
 	FInv_SlotAvailabilityResult HasRoomForItem(const UInv_InventoryItem* Item);
 	FInv_SlotAvailabilityResult HasRoomForItem(const struct FInv_ItemManifest& Manifest);
+	void AddItemToIndices(const FInv_SlotAvailabilityResult& Result, UInv_InventoryItem* NewItem);
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
