@@ -6,6 +6,8 @@
 #include "Items/Inv_InventoryItem.h"
 #include "Items/Components/Inv_ItemComponent.h"
 #include "Items/Manifest/Inv_ItemManifest.h"
+#include "Items/Fragments/Inv_ItemFragment.h"
+#include "Items/Fragments/Inv_FragmentTags.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
@@ -55,9 +57,10 @@ FInv_SlotAvailabilityResult UInv_InventoryGrid::HasRoomForItem(const FInv_ItemMa
 
 void UInv_InventoryGrid::AddItemToIndices(const FInv_SlotAvailabilityResult& Result, UInv_InventoryItem* NewItem)
 {
-	// Get Grid Fragment so we know how many grid spaces the item takes.
-	// Get Image Fragment so we have the icon to display.
-	
+	const FInv_GridFragment* GridFragment = GetFragment<FInv_GridFragment>(NewItem, FragmentTags::GridFragment);
+	const FInv_ImageFragment* ImageFragment = GetFragment<FInv_ImageFragment>(NewItem, FragmentTags::IconFragment);
+	if (!GridFragment || !ImageFragment) return;
+
 	// Create a widget to add to the grid.
 	// Store the new widget in a container.
 }
