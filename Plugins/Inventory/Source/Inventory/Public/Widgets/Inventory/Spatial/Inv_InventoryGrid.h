@@ -16,6 +16,8 @@ public:
 	UFUNCTION()
 	void AddItem(class UInv_InventoryItem* Item);
 
+	FInv_SlotAvailabilityResult HasRoomForItem(const class UInv_ItemComponent* ItemComponent);
+
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
 	EInv_ItemCategory ItemCategory;
@@ -42,6 +44,8 @@ private:
 
 	void ConstructGrid();
 	bool MatchesCategory(const UInv_InventoryItem* Item) const;
+	FInv_SlotAvailabilityResult HasRoomForItem(const UInv_InventoryItem* Item);
+	FInv_SlotAvailabilityResult HasRoomForItem(const struct FInv_ItemManifest& Manifest);
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
