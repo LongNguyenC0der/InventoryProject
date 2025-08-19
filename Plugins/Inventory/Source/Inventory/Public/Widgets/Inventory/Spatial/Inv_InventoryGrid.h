@@ -13,6 +13,9 @@ class INVENTORY_API UInv_InventoryGrid : public UUserWidget
 public:
 	virtual void NativeOnInitialized() override;
 
+	UFUNCTION()
+	void AddItem(class UInv_InventoryItem* Item);
+
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
 	EInv_ItemCategory ItemCategory;
@@ -35,7 +38,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	float TileSize;
 
+	TWeakObjectPtr<class UInv_InventoryComponent> InventoryComponent;
+
 	void ConstructGrid();
+	bool MatchesCategory(const UInv_InventoryItem* Item) const;
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
