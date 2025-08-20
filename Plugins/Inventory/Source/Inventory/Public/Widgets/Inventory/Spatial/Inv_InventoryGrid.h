@@ -63,8 +63,10 @@ private:
 	bool IsIndexClaimed(const TSet<int32>& CheckedIndices, const int32 Index) const;
 	bool HasRoomAtIndex(const UInv_GridSlot* GridSlot, const FIntPoint& Dimensions, const TSet<int32>& CheckedIndices, TSet<int32>& OutTentativelyClaimed);
 	FIntPoint GetItemDimensions(const FInv_ItemManifest& Manifest) const;
-	bool CheckSlotConstraints(const UInv_GridSlot* SubGridSlot, const TSet<int32>& CheckedIndices, TSet<int32>& OutTentativelyClaimed) const;
+	bool CheckSlotConstraints(const UInv_GridSlot* GridSlot, const UInv_GridSlot* SubGridSlot, const TSet<int32>& CheckedIndices,
+		TSet<int32>& OutTentativelyClaimed) const;
 	bool HasValidItem(const UInv_GridSlot* GridSlot) const;
+	bool IsUpperLeftSlot(const UInv_GridSlot* GridSlot, const UInv_GridSlot* SubGridSlot) const;
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
