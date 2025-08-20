@@ -61,12 +61,14 @@ private:
 	void AddSlottedItemToCanvas(const int32 Index, const FInv_GridFragment* GridFragment, UInv_SlottedItem* SlottedItem) const;
 	void UpdateGridSlots(UInv_InventoryItem* NewItem, const int32 Index, bool bStackableItem, const int32 StackAmount);
 	bool IsIndexClaimed(const TSet<int32>& CheckedIndices, const int32 Index) const;
-	bool HasRoomAtIndex(const UInv_GridSlot* GridSlot, const FIntPoint& Dimensions, const TSet<int32>& CheckedIndices, TSet<int32>& OutTentativelyClaimed);
+	bool HasRoomAtIndex(const UInv_GridSlot* GridSlot, const FIntPoint& Dimensions, const TSet<int32>& CheckedIndices, TSet<int32>& OutTentativelyClaimed, 
+		const struct FGameplayTag& ItemType);
 	FIntPoint GetItemDimensions(const FInv_ItemManifest& Manifest) const;
 	bool CheckSlotConstraints(const UInv_GridSlot* GridSlot, const UInv_GridSlot* SubGridSlot, const TSet<int32>& CheckedIndices,
-		TSet<int32>& OutTentativelyClaimed) const;
+		TSet<int32>& OutTentativelyClaimed, const FGameplayTag& ItemType) const;
 	bool HasValidItem(const UInv_GridSlot* GridSlot) const;
 	bool IsUpperLeftSlot(const UInv_GridSlot* GridSlot, const UInv_GridSlot* SubGridSlot) const;
+	bool DoesItemTypeMatch(const UInv_InventoryItem* SubItem, const FGameplayTag& ItemType) const;
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
