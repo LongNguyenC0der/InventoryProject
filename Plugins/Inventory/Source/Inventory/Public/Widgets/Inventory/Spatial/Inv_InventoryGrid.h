@@ -17,6 +17,8 @@ public:
 	void AddItem(class UInv_InventoryItem* Item);
 
 	FInv_SlotAvailabilityResult HasRoomForItem(const class UInv_ItemComponent* ItemComponent);
+	bool IsRightClick(const FPointerEvent& MouseEvent) const;
+	bool IsLeftClick(const FPointerEvent& MouseEvent) const;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
@@ -45,6 +47,12 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	float TileSize;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<class UInv_HoverItem> HoverItemClass;
+
+	UPROPERTY()
+	TObjectPtr<UInv_HoverItem> HoverItem;
 
 	TWeakObjectPtr<class UInv_InventoryComponent> InventoryComponent;
 
