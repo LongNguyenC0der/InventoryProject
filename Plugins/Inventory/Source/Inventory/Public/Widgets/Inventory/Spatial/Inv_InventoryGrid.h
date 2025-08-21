@@ -19,6 +19,8 @@ public:
 	FInv_SlotAvailabilityResult HasRoomForItem(const class UInv_ItemComponent* ItemComponent);
 	bool IsRightClick(const FPointerEvent& MouseEvent) const;
 	bool IsLeftClick(const FPointerEvent& MouseEvent) const;
+	void PickUp(UInv_InventoryItem* ClickedInventoryItem, const int32 GridIndex);
+	void AssignHoverItem(UInv_InventoryItem* InventoryItem);
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
