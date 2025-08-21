@@ -48,6 +48,9 @@ private:
 
 	TWeakObjectPtr<class UInv_InventoryComponent> InventoryComponent;
 
+	UFUNCTION()
+	void AddStacks(const FInv_SlotAvailabilityResult& Result);
+
 	void ConstructGrid();
 	bool MatchesCategory(const UInv_InventoryItem* Item) const;
 	FInv_SlotAvailabilityResult HasRoomForItem(const UInv_InventoryItem* Item);
