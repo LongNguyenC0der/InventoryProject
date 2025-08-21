@@ -14,8 +14,11 @@ class INVENTORY_API UInv_ItemComponent : public UActorComponent
 public:	
 	UInv_ItemComponent();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	void PickedUp();
 
 protected:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
+	void OnPickedUp();
 
 private:
 	UPROPERTY(Replicated, EditAnywhere, Category = "Inventory")
