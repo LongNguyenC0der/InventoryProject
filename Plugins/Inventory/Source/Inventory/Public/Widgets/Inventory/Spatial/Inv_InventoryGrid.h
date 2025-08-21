@@ -51,6 +51,9 @@ private:
 	UFUNCTION()
 	void AddStacks(const FInv_SlotAvailabilityResult& Result);
 
+	UFUNCTION()
+	void OnSlottedItemClicked(int32 GridIndex, const FPointerEvent& MouseEvent);
+
 	void ConstructGrid();
 	bool MatchesCategory(const UInv_InventoryItem* Item) const;
 	FInv_SlotAvailabilityResult HasRoomForItem(const UInv_InventoryItem* Item);

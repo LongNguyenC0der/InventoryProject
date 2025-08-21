@@ -2,6 +2,12 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 
+FReply UInv_SlottedItem::NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	OnSlottedItemClicked.Broadcast(GridIndex, MouseEvent);
+	return FReply::Handled();
+}
+
 void UInv_SlottedItem::SetImageBrush(const FSlateBrush& Brush) const
 {
 	Image_Icon->SetBrush(Brush);
