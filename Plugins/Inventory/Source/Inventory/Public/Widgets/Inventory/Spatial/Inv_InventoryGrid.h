@@ -59,6 +59,8 @@ private:
 	TObjectPtr<UInv_HoverItem> HoverItem;
 
 	TWeakObjectPtr<class UInv_InventoryComponent> InventoryComponent;
+	FInv_TileParameters TileParameters;
+	FInv_TileParameters LastTileParameters;
 
 	UFUNCTION()
 	void AddStacks(const FInv_SlotAvailabilityResult& Result);
