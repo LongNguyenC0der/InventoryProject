@@ -5,6 +5,8 @@
 #include "Types/Inv_GridTypes.h"
 #include "Inv_InventoryGrid.generated.h"
 
+enum class EInv_GridSlotState : uint8;
+
 UCLASS()
 class INVENTORY_API UInv_InventoryGrid : public UUserWidget
 {
@@ -133,11 +135,13 @@ private:
 	bool CursorExitedCanvas(const FVector2D& BoundaryPos, const FVector2D BoundarySize, const FVector2D& Location);
 	void HighlightSlots(const int32 Index, const FIntPoint& Dimensions);
 	void UnHighlightSlot(const int32 Index, const FIntPoint& Dimensions);
-	void ChangeHoverType(const int32 Index, const FIntPoint& Dimensions, enum class EInv_GridSlotState GridSlotState);
+	void ChangeHoverType(const int32 Index, const FIntPoint& Dimensions, EInv_GridSlotState GridSlotState);
 	void PutDownOnIndex(const int32 Index);
 	void ClearHoverItem();
 	UUserWidget* GetVisibleCursorWidget();
 	UUserWidget* GetHiddenCursorWidget();
+	bool IsSameStackable(const UInv_InventoryItem* ClickedInventoryItem) const;
+	void SwapWithHoverItem(UInv_InventoryItem* ClickedInventoryItem, const int32 GridIndex);
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
