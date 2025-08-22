@@ -24,6 +24,8 @@ public:
 	void AssignHoverItem(UInv_InventoryItem* InventoryItem);
 	void AssignHoverItem(UInv_InventoryItem* InventoryItem, const int32 GridIndex, const int32 PreviousGridIndex);
 	void RemoveItemFromGrid(UInv_InventoryItem* InventoryItem, const int32 GridIndex);
+	void ShowCursor();
+	void HideCursor();
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
@@ -55,6 +57,18 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	TSubclassOf<class UInv_HoverItem> HoverItemClass;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<UUserWidget> VisibleCursorWidgetClass;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<UUserWidget> HiddenCursorWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UUserWidget> VisibleCursorWidget;
+
+	UPROPERTY()
+	TObjectPtr<UUserWidget> HiddenCursorWidget;
 
 	UPROPERTY()
 	TObjectPtr<UInv_HoverItem> HoverItem;
@@ -122,6 +136,8 @@ private:
 	void ChangeHoverType(const int32 Index, const FIntPoint& Dimensions, enum class EInv_GridSlotState GridSlotState);
 	void PutDownOnIndex(const int32 Index);
 	void ClearHoverItem();
+	UUserWidget* GetVisibleCursorWidget();
+	UUserWidget* GetHiddenCursorWidget();
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
