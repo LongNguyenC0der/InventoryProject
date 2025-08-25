@@ -112,6 +112,15 @@ private:
 	UFUNCTION()
 	void OnGridSlotUnhovered(int32 GridIndex, const FPointerEvent& MouseEvent);
 
+	UFUNCTION()
+	void OnPopUpMenuSplit(int32 SplitAmount, int32 Index);
+
+	UFUNCTION()
+	void OnPopUpMenuDrop(int32 Index);
+
+	UFUNCTION()
+	void OnPopUpMenuConsume(int32 Index);
+
 	void ConstructGrid();
 	bool MatchesCategory(const UInv_InventoryItem* Item) const;
 	FInv_SlotAvailabilityResult HasRoomForItem(const UInv_InventoryItem* Item);
