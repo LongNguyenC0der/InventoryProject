@@ -15,6 +15,9 @@ public:
 
 private:
 	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UCanvasPanel> CanvasPanel;
+
+	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UWidgetSwitcher> Switcher;
 
 	UPROPERTY(meta = (BindWidget))

@@ -3,6 +3,7 @@
 #include "Widgets/Inventory/SlottedItems/Inv_SlottedItem.h"
 #include "Widgets/Inventory/HoverItem/Inv_HoverItem.h"
 #include "Widgets/Utils/Inv_WidgetUtils.h"
+#include "Widgets/ItemPopUp/Inv_ItemPopUp.h"
 #include "InventoryManagement/Utils/Inv_InventoryStatics.h"
 #include "InventoryManagement/Components/Inv_InventoryComponent.h"
 #include "Items/Inv_InventoryItem.h"
@@ -667,6 +668,19 @@ void UInv_InventoryGrid::FillInStack(const int32 FillAmount, const int32 Remaind
 	HoverItem->UpdateStackCount(Remainder);
 }
 
+void UInv_InventoryGrid::CreateItemPopUp(const int32 GridIndex)
+{
+	UInv_InventoryItem* RightClickedItem = GridSlots[GridIndex]->GetInventoryItem().Get();
+	if (!IsValid(RightClickedItem)) return;
+
+	ItemPopUp = CreateWidget<UInv_ItemPopUp>(this, ItemPopUpClass);
+	OwningCanvasPanel->AddChild(ItemPopUp);
+	UCanvasPanelSlot* CanvasSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(ItemPopUp);
+	const FVector2D MousePosition = UWidgetLayoutLibrary::GetMousePositionOnViewport(GetOwningPlayer());
+	CanvasSlot->SetPosition(MousePosition);
+	CanvasSlot->SetSize(ItemPopUp->GetBoxSize());
+}
+
 void UInv_InventoryGrid::ShowCursor()
 {
 	if (!IsValid(GetOwningPlayer())) return;
@@ -734,6 +748,12 @@ void UInv_InventoryGrid::OnSlottedItemClicked(int32 GridIndex, const FPointerEve
 	if (!IsValid(HoverItem) && IsLeftClick(MouseEvent))
 	{
 		PickUp(ClickedInventoryItem, GridIndex);
+		return;
+	}
+
+	if (IsRightClick(MouseEvent))
+	{
+		CreateItemPopUp(GridIndex);
 		return;
 	}
 

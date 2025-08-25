@@ -75,6 +75,13 @@ private:
 	UPROPERTY()
 	TObjectPtr<UInv_HoverItem> HoverItem;
 
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<class UInv_ItemPopUp> ItemPopUpClass;
+
+	UPROPERTY()
+	TObjectPtr<UInv_ItemPopUp> ItemPopUp;
+
+	TWeakObjectPtr<UCanvasPanel> OwningCanvasPanel;
 	TWeakObjectPtr<class UInv_InventoryComponent> InventoryComponent;
 	FInv_TileParameters TileParameters;
 	FInv_TileParameters LastTileParameters;
@@ -148,7 +155,9 @@ private:
 	void ConsumeHoverItemStacks(const int32 ClickedStackCount, const int32 HoveredStackCount, const int32 Index);
 	bool ShouldFillInStack(const int32 RoomInClickedSlot, const int32 HoveredStackCount) const;
 	void FillInStack(const int32 FillAmount, const int32 Remainder, const int32 Index);
+	void CreateItemPopUp(const int32 GridIndex);
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
+	void SetOwningCanvas(UCanvasPanel* OwningCanvas) { OwningCanvasPanel = OwningCanvas; }
 };
