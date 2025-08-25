@@ -41,7 +41,14 @@ void UInv_InventoryComponent::AddRepSubObj(UObject* SubObj)
 
 void UInv_InventoryComponent::SpawnDroppedItem(UInv_InventoryItem* Item, int32 StackCount)
 {
-	// TODO: Spawn the dropped item in the level
+	const APawn* OwningPawn = OwningController->GetPawn();
+	FVector RotatedForward = OwningPawn->GetActorForwardVector();
+	RotatedForward = RotatedForward.RotateAngleAxis(FMath::FRandRange(DropSpawnAngleMin, DropSpawnAngleMax), FVector::UpVector);
+	FVector SpawnLocation = OwningPawn->GetActorLocation() + RotatedForward * FMath::FRandRange(DropSpawnDistanceMin, DropSpawnDistanceMax);
+	SpawnLocation.Z -= RelativeSpawnElevation;
+	const FRotator SpawnRotation = FRotator::ZeroRotator;
+
+	// TODO: Have the Item Manifest spawn the pickup actor.
 }
 
 void UInv_InventoryComponent::TryAddItem(UInv_ItemComponent* ItemComponent)
