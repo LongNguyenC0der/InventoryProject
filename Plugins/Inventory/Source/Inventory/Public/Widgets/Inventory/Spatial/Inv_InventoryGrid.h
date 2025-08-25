@@ -143,6 +143,7 @@ private:
 	bool IsSameStackable(const UInv_InventoryItem* ClickedInventoryItem) const;
 	void SwapWithHoverItem(UInv_InventoryItem* ClickedInventoryItem, const int32 GridIndex);
 	bool ShouldSwapStackCounts(const int32 RoomInClickedSlot, const int32 HoveredStackCount, const int32 MaxStackSize) const;
+	void SwapStackCounts(const int32 ClickedStackCount, const int32 HoveredStackCount, const int32 Index);
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
