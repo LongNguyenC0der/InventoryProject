@@ -1,0 +1,24 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Widgets/Composite/Inv_Leaf.h"
+#include "Inv_Leaf_Image.generated.h"
+
+UCLASS()
+class INVENTORY_API UInv_Leaf_Image : public UInv_Leaf
+{
+	GENERATED_BODY()
+	
+public:
+	void SetImage(UTexture2D* Texture) const;
+	void SetBoxSize(const FVector2D& Size) const;
+	void SetImageSize(const FVector2D& Size) const;
+	FVector2D GetImageSize() const;
+
+private:
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UImage> Image_Icon;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class USizeBox> SizeBox_Icon;
+};
