@@ -13,6 +13,9 @@ public:
 	virtual void NativeOnInitialized() override;
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 	virtual FInv_SlotAvailabilityResult HasRoomForItem(UInv_ItemComponent* ItemComponent) const override;
+	virtual void OnItemHovered(UInv_InventoryItem* Item) override;
+	virtual void OnItemUnhovered() override;
+	virtual bool HasHoverItem() const override;
 
 private:
 	UPROPERTY(meta = (BindWidget))
@@ -39,6 +42,17 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UButton> Button_Craftables;
 
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<class UInv_ItemDescription> ItemDescriptionClass;
+
+	UPROPERTY()
+	TObjectPtr<UInv_ItemDescription> ItemDescription;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	float DescriptionTimerDelay = 0.5f;
+
+	FTimerHandle DescriptionTimer;
+
 	TWeakObjectPtr<UInv_InventoryGrid> ActiveGrid;
 
 	UFUNCTION()
@@ -52,4 +66,5 @@ private:
 
 	void SetActiveGrid(UInv_InventoryGrid* Grid, UButton* Button);
 	void DisableButton(UButton* Button);
+	UInv_ItemDescription* GetItemDescription();
 };

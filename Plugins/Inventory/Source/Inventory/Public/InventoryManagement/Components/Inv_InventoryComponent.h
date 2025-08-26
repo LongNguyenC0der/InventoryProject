@@ -20,6 +20,7 @@ public:
 	void ToggleInventoryMenu();
 	void AddRepSubObj(UObject* SubObj);
 	void SpawnDroppedItem(UInv_InventoryItem* Item, int32 StackCount);
+	UInv_InventoryBase* GetInventoryMenu() const { return InventoryMenu; }
 
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
 	void TryAddItem(class UInv_ItemComponent* ItemComponent);

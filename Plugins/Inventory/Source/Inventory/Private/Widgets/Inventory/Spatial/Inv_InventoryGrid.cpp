@@ -717,6 +717,11 @@ void UInv_InventoryGrid::DropItem()
 	ShowCursor();
 }
 
+bool UInv_InventoryGrid::HasHoverItem() const
+{
+	return IsValid(HoverItem);
+}
+
 void UInv_InventoryGrid::ShowCursor()
 {
 	if (!IsValid(GetOwningPlayer())) return;
