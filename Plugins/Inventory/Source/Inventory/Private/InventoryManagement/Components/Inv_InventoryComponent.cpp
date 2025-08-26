@@ -129,6 +129,22 @@ void UInv_InventoryComponent::Server_DropItem_Implementation(UInv_InventoryItem*
 	SpawnDroppedItem(Item, StackCount);
 }
 
+void UInv_InventoryComponent::Server_ConsumeItem_Implementation(UInv_InventoryItem* Item)
+{
+	const int32 NewStackCount = Item->GetTotalStackCount() - 1;
+	if (NewStackCount <= 0)
+	{
+		InventoryList.RemoveEntry(Item);
+	}
+	else
+	{
+		Item->SetTotalStackCount(NewStackCount);
+	}
+
+	// TODO: Get the consumable fragment and call Consume()
+	// (Actually create the Consumable Fragment)
+}
+
 void UInv_InventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
