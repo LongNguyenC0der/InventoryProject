@@ -22,6 +22,6 @@ private:
 	FGameplayTag FragmentTag;
 
 public:
-	FGameplayTag GetFragment() const { return FragmentTag; }
+	FGameplayTag GetFragmentTag() const { return FragmentTag; }
 	void SetFragmentTag(const FGameplayTag& Tag) { FragmentTag = Tag; }
 };
