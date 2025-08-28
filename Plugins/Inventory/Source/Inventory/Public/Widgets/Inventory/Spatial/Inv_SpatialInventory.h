@@ -19,6 +19,9 @@ public:
 	virtual bool HasHoverItem() const override;
 
 private:
+	UPROPERTY()
+	TArray<TObjectPtr<class UInv_EquippedGridSlot>> EquippedGridSlots;
+
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UCanvasPanel> CanvasPanel;
 
@@ -64,6 +67,9 @@ private:
 
 	UFUNCTION()
 	void ShowCraftables();
+
+	UFUNCTION()
+	void EquippedGridSlotClicked(UInv_EquippedGridSlot* EquippedGridSlot, const FGameplayTag& EquipmentTypeTag);
 
 	void SetActiveGrid(UInv_InventoryGrid* Grid, UButton* Button);
 	void DisableButton(UButton* Button);
