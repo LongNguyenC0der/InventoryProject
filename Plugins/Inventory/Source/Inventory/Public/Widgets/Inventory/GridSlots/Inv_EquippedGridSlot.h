@@ -28,6 +28,9 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UImage> Image_GrayedOutIcon;
 
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UOverlay> Overlay_Root;
+
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	TSubclassOf<UInv_EquippedSlottedItem> EquippedSlottedItemClass;
 
