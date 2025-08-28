@@ -175,4 +175,5 @@ private:
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }
 	void SetOwningCanvas(UCanvasPanel* OwningCanvas) { OwningCanvasPanel = OwningCanvas; }
+	float GetTileSize() const { return TileSize; }
 };
