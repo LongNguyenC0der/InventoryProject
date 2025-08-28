@@ -21,14 +21,14 @@ void FInv_HealthPotionFragment::OnConsume(APlayerController* PC)
 	// or get the Ability System Component and apply a Gameplay Effect
 	// or call an interface function for Healing()
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Mana Potion consumed! Mana replenished by: %f"), HealthAmount));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Mana Potion consumed! Mana replenished by: %f"), GetValue()));
 }
 
 void FInv_ManaPotionFragment::OnConsume(APlayerController* PC)
 {
 	// Replenish mana however you wish
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Health Potion consumed! Healing by: %f"), ManaAmount));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Health Potion consumed! Healing by: %f"), GetValue()));
 }
 
 void FInv_ImageFragment::Assimilate(UInv_CompositeBase* Composite) const
@@ -81,4 +81,35 @@ void FInv_LabeledNumberFragment::Assimilate(UInv_CompositeBase* Composite) const
 	Options.MaximumFractionalDigits = MaxFractionalDigits;
 
 	LabeledValue->SetText_Value(FText::AsNumber(Value, &Options), bCollapseValue);
+}
+
+void FInv_ConsumableFragment::OnConsume(APlayerController* PC)
+{
+	for (auto& Modifier : ConsumeModifiers)
+	{
+		auto& ModRef = Modifier.GetMutable();
+		ModRef.OnConsume(PC);
+	}
+}
+
+void FInv_ConsumableFragment::Assimilate(UInv_CompositeBase* Composite) const
+{
+	Super::Assimilate(Composite);
+
+	for (const auto& Modifier : ConsumeModifiers)
+	{
+		const auto& ModRef = Modifier.Get();
+		ModRef.Assimilate(Composite);
+	}
+}
+
+void FInv_ConsumableFragment::Manifest()
+{
+	Super::Manifest();
+
+	for (auto& Modifier : ConsumeModifiers)
+	{
+		auto& ModRef = Modifier.GetMutable();
+		ModRef.Manifest();
+	}
 }
