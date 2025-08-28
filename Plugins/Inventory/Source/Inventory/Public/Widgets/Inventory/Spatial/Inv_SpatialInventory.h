@@ -76,4 +76,5 @@ private:
 	void DisableButton(UButton* Button);
 	UInv_ItemDescription* GetItemDescription();
 	void SetItemDescriptionSizeAndPosition(UInv_ItemDescription* Description, UCanvasPanel* Canvas) const;
+	bool CanEquipHoverItem(UInv_EquippedGridSlot* EquippedGridSlot, const FGameplayTag& EquipmentTypeTag) const;
 };
