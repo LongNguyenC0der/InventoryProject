@@ -31,6 +31,7 @@ public:
 	void DropItem();
 	bool HasHoverItem() const;
 	class UInv_HoverItem* GetHoverItem() const;
+	void ClearHoverItem();
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
@@ -159,7 +160,6 @@ private:
 	void UnHighlightSlot(const int32 Index, const FIntPoint& Dimensions);
 	void ChangeHoverType(const int32 Index, const FIntPoint& Dimensions, EInv_GridSlotState GridSlotState);
 	void PutDownOnIndex(const int32 Index);
-	void ClearHoverItem();
 	UUserWidget* GetVisibleCursorWidget();
 	UUserWidget* GetHiddenCursorWidget();
 	bool IsSameStackable(const UInv_InventoryItem* ClickedInventoryItem) const;
