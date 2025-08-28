@@ -17,6 +17,7 @@ public:
 	virtual void OnItemHovered(UInv_InventoryItem* Item) override;
 	virtual void OnItemUnhovered() override;
 	virtual bool HasHoverItem() const override;
+	virtual class UInv_HoverItem* GetHoverItem() const override;
 
 private:
 	UPROPERTY()

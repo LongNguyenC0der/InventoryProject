@@ -26,6 +26,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	static void ItemUnhovered(APlayerController* PC);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	static class UInv_HoverItem* GetHoverItem(APlayerController* PC);
 };
 
 template<typename T, typename FuncT>

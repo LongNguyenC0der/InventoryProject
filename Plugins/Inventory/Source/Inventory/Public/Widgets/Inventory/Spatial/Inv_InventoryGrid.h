@@ -30,6 +30,7 @@ public:
 	void HideCursor();
 	void DropItem();
 	bool HasHoverItem() const;
+	class UInv_HoverItem* GetHoverItem() const;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
