@@ -188,7 +188,7 @@ void UInv_SpatialInventory::EquippedSlottedItemClicked(UInv_EquippedSlottedItem*
 	MakeEquippedSlottedItem(EquippedSlottedItem, EquippedGridSlot, ItemToEquip);
 
 	// Broadcast delegates for OnItemEquipped/OnItemUnequipped (from the IC)
-	
+	BroadcastSlotClickedDelegate(ItemToEquip, ItemToUnequip);
 }
 
 void UInv_SpatialInventory::SetActiveGrid(UInv_InventoryGrid* Grid, UButton* Button)
@@ -288,7 +288,21 @@ void UInv_SpatialInventory::MakeEquippedSlottedItem(UInv_EquippedSlottedItem* Eq
 		EquippedSlottedItem->GetEquipmentTypeTag(),
 		UInv_InventoryStatics::GetInventoryWidget(GetOwningPlayer())->GetTileSize()
 	);
-	SlottedItem->OnEquippedSlottedItemClicked.AddDynamic(this, &ThisClass::EquippedSlottedItemClicked);
+	if (IsValid(SlottedItem)) SlottedItem->OnEquippedSlottedItemClicked.AddDynamic(this, &ThisClass::EquippedSlottedItemClicked);
 
 	EquippedGridSlot->SetEquippedSlottedItem(SlottedItem);
+}
+
+void UInv_SpatialInventory::BroadcastSlotClickedDelegate(UInv_InventoryItem* ItemToEquip, UInv_InventoryItem* ItemToUnequip) const
+{
+	UInv_InventoryComponent* InventoryComponent = UInv_InventoryStatics::GetInventoryComponent(GetOwningPlayer());
+	check(IsValid(InventoryComponent));
+
+	InventoryComponent->Server_EquipSlotClicked(ItemToEquip, ItemToUnequip);
+
+	if (GetOwningPlayer()->GetNetMode() != NM_DedicatedServer)
+	{
+		InventoryComponent->OnItemEquipped.Broadcast(ItemToEquip);
+		InventoryComponent->OnItemUnequipped.Broadcast(ItemToUnequip);
+	}
 }

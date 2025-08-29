@@ -14,6 +14,8 @@ void UInv_EquippedGridSlot::NativeOnMouseEnter(const FGeometry& InGeometry, cons
     Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
 
     if (!IsAvailable()) return;
+    if (IsValid(EquippedSlottedItem)) return;
+
     UInv_HoverItem* HoverItem = UInv_InventoryStatics::GetHoverItem(GetOwningPlayer());
     if (!IsValid(HoverItem)) return;
 
@@ -29,6 +31,8 @@ void UInv_EquippedGridSlot::NativeOnMouseLeave(const FPointerEvent& InMouseEvent
     Super::NativeOnMouseLeave(InMouseEvent);
 
     if (!IsAvailable()) return;
+    if (IsValid(EquippedSlottedItem)) return;
+
     UInv_HoverItem* HoverItem = UInv_InventoryStatics::GetHoverItem(GetOwningPlayer());
     if (!IsValid(HoverItem)) return;
 
