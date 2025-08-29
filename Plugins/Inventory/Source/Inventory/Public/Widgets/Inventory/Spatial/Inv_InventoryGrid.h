@@ -32,6 +32,7 @@ public:
 	bool HasHoverItem() const;
 	class UInv_HoverItem* GetHoverItem() const;
 	void ClearHoverItem();
+	void OnHide();
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
@@ -125,10 +126,13 @@ private:
 	UFUNCTION()
 	void OnPopUpMenuConsume(int32 Index);
 
+	UFUNCTION()
+	void OnInventoryMenuToggled(bool bOpen);
+
 	void ConstructGrid();
 	bool MatchesCategory(const UInv_InventoryItem* Item) const;
-	FInv_SlotAvailabilityResult HasRoomForItem(const UInv_InventoryItem* Item);
-	FInv_SlotAvailabilityResult HasRoomForItem(const struct FInv_ItemManifest& Manifest);
+	FInv_SlotAvailabilityResult HasRoomForItem(const UInv_InventoryItem* Item, const int32 StackAmountOverride = -1);
+	FInv_SlotAvailabilityResult HasRoomForItem(const struct FInv_ItemManifest& Manifest, const int32 StackAmountOverride = -1);
 	void AddItemToIndices(const FInv_SlotAvailabilityResult& Result, UInv_InventoryItem* NewItem);
 	FVector2D GetDrawSize(const struct FInv_GridFragment* GridFragment) const;
 	void SetSlottedItemImage(const UInv_SlottedItem* SlottedItem, const FInv_GridFragment* GridFragment, const struct FInv_ImageFragment* ImageFragment) const;
@@ -171,6 +175,7 @@ private:
 	bool ShouldFillInStack(const int32 RoomInClickedSlot, const int32 HoveredStackCount) const;
 	void FillInStack(const int32 FillAmount, const int32 Remainder, const int32 Index);
 	void CreateItemPopUp(const int32 GridIndex);
+	void PutHoverItemBack();
 
 public:
 	EInv_ItemCategory GetItemCategory() const { return ItemCategory; }

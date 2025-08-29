@@ -193,7 +193,11 @@ void UInv_SpatialInventory::EquippedSlottedItemClicked(UInv_EquippedSlottedItem*
 
 void UInv_SpatialInventory::SetActiveGrid(UInv_InventoryGrid* Grid, UButton* Button)
 {
-	if (ActiveGrid.IsValid()) ActiveGrid->HideCursor();
+	if (ActiveGrid.IsValid())
+	{
+		ActiveGrid->HideCursor();
+		ActiveGrid->OnHide();
+	}
 	ActiveGrid = Grid;
 	if (ActiveGrid.IsValid()) ActiveGrid->ShowCursor();
 	DisableButton(Button);
