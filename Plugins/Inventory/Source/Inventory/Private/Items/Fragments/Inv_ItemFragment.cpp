@@ -3,6 +3,7 @@
 #include "Widgets/Composite/Inv_Leaf_Image.h"
 #include "Widgets/Composite/Inv_Leaf_Text.h"
 #include "Widgets/Composite/Inv_Leaf_LabeledValue.h"
+#include "EquipmentManagement/EquipActor/Inv_EquipActor.h"
 
 void FInv_InventoryItemFragment::Assimilate(UInv_CompositeBase* Composite) const
 {
@@ -173,5 +174,23 @@ void FInv_EquipmentFragment::OnUnequip(APlayerController* PC)
 	{
 		auto& ModRef = Modifier.GetMutable();
 		ModRef.OnUnequip(PC);
+	}
+}
+
+AInv_EquipActor* FInv_EquipmentFragment::SpawnAttachedActor(USkeletalMeshComponent* AttachMesh) const
+{
+	if (!IsValid(EquipActorClass) || !IsValid(AttachMesh)) return nullptr;
+
+	AInv_EquipActor* SpawnedActor = AttachMesh->GetWorld()->SpawnActor<AInv_EquipActor>(EquipActorClass);
+	SpawnedActor->AttachToComponent(AttachMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketAttachPoint);
+
+	return SpawnedActor;
+}
+
+void FInv_EquipmentFragment::DestroyAttachedActor() const
+{
+	if (EquippedActor.IsValid())
+	{
+		EquippedActor->Destroy();
 	}
 }

@@ -204,6 +204,7 @@ struct FInv_StrengthModifier : public FInv_EquipModifier
 	virtual void OnUnequip(APlayerController* PC) override;
 };
 
+class AInv_EquipActor;
 USTRUCT(BlueprintType)
 struct FInv_EquipmentFragment : public FInv_InventoryItemFragment
 {
@@ -214,9 +215,21 @@ struct FInv_EquipmentFragment : public FInv_InventoryItemFragment
 	void OnEquip(APlayerController* PC);
 	void OnUnequip(APlayerController* PC);
 
+	AInv_EquipActor* SpawnAttachedActor(USkeletalMeshComponent* AttachMesh) const;
+	void DestroyAttachedActor() const;
+
 	bool bEquipped = false;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (ExcludeBaseStruct))
 	TArray<TInstancedStruct<FInv_EquipModifier>> EquipModifiers;
+
+	// Can be a TArray of a custom struct if the mesh required more than 1 socket upon equip
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<AInv_EquipActor> EquipActorClass = nullptr;
+
+	TWeakObjectPtr<AInv_EquipActor> EquippedActor = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	FName SocketAttachPoint{NAME_None};
 };
