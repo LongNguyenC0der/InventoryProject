@@ -218,11 +218,17 @@ struct FInv_EquipmentFragment : public FInv_InventoryItemFragment
 	AInv_EquipActor* SpawnAttachedActor(USkeletalMeshComponent* AttachMesh) const;
 	void DestroyAttachedActor() const;
 
+	FGameplayTag GetEquipmentType() const { return EquipmentType; }
+	void SetEquippedActor(AInv_EquipActor* EquipActor) { EquippedActor = EquipActor; }
+
 	bool bEquipped = false;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (ExcludeBaseStruct))
 	TArray<TInstancedStruct<FInv_EquipModifier>> EquipModifiers;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	FGameplayTag EquipmentType = FGameplayTag::EmptyTag;
 
 	// Can be a TArray of a custom struct if the mesh required more than 1 socket upon equip
 	UPROPERTY(EditAnywhere, Category = "Inventory")

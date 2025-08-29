@@ -6,6 +6,9 @@
 
 class UInv_InventoryComponent;
 class UInv_InventoryItem;
+class AInv_EquipActor;
+struct FInv_EquipmentFragment;
+struct FInv_ItemManifest;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable )
 class INVENTORY_API UInv_EquipmentComponent : public UActorComponent
@@ -22,6 +25,9 @@ private:
 	TWeakObjectPtr<APlayerController> OwningPlayerController;
 	TWeakObjectPtr<USkeletalMeshComponent> OwningSkeletalMesh;
 
+	UPROPERTY()
+	TArray<TObjectPtr<AInv_EquipActor>> EquippedActors;
+
 	UFUNCTION()
 	void OnItemEquipped(UInv_InventoryItem* EquippedItem);
 
@@ -29,4 +35,5 @@ private:
 	void OnItemUnequipped(UInv_InventoryItem* UnequippedItem);
 
 	void InitInventoryComponent();
+	AInv_EquipActor* SpawnEquippedActor(FInv_EquipmentFragment* EquipmentFragment, const FInv_ItemManifest& Manifest, USkeletalMeshComponent* AttachMesh);
 };
