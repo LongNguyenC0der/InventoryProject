@@ -9,6 +9,7 @@ class UInv_InventoryItem;
 class AInv_EquipActor;
 struct FInv_EquipmentFragment;
 struct FInv_ItemManifest;
+struct FGameplayTag;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable )
 class INVENTORY_API UInv_EquipmentComponent : public UActorComponent
@@ -36,4 +37,6 @@ private:
 
 	void InitInventoryComponent();
 	AInv_EquipActor* SpawnEquippedActor(FInv_EquipmentFragment* EquipmentFragment, const FInv_ItemManifest& Manifest, USkeletalMeshComponent* AttachMesh);
+	AInv_EquipActor* FindEquippedActor(const FGameplayTag& EquipmentTypeTag);
+	void RemoveEquippedActor(const FGameplayTag& EquipmentTypeTag);
 };
