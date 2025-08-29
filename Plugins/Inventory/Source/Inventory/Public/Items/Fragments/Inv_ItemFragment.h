@@ -210,6 +210,7 @@ struct FInv_EquipmentFragment : public FInv_InventoryItemFragment
 	GENERATED_BODY()
 
 	virtual void Assimilate(UInv_CompositeBase* Composite) const override;
+	virtual void Manifest() override;
 	void OnEquip(APlayerController* PC);
 	void OnUnequip(APlayerController* PC);
 
